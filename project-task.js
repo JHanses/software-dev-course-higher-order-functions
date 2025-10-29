@@ -44,6 +44,28 @@ Step-by-Step:
 3. Return the filtered result.
 */
 
+//Define the filterProducts function
+function filterProducts(productsArray, criteriaCallback) {
+  //Return only the products that meet the given criteria
+  return productsArray.filter(criteriaCallback);
+  // match category and/or price range if provided
+}
+// sample data
+const productsArray= [
+  { name: "Laptop", price: 1000, inStock: true },
+  { name: "Phone", price: 500, inStock: false },
+  { name: "Tablet", price: 800, inStock: true },
+  { name: "Monitor", price: 300, inStock: true },
+  { name: "Keyboard", price: 100, inStock: false },
+];
+
+function isInStock(product) {
+  return product.inStock === true;
+}
+
+const availableProducts = filterProducts (productsArray, isInStock);
+console.log(availableProducts);
+
 
 /*
 🔹 Task 2: Transform Product Names
@@ -55,6 +77,13 @@ Step-by-Step:
 2. Extract and transform the `name` property to uppercase.
 3. Store the result in a new variable.
 */
+
+const productNames = productsArray.map(product => product.name);
+console.log(productNames);
+// Output: ["Laptop", "Phone", "Tablet", "Monitor", "Keyboard" ]]
+
+const uppercaseNames = productNames.map(name => name.toUpperCase());
+console.log(uppercaseNames);
 
 
 /*
@@ -70,6 +99,24 @@ Step-by-Step:
 3. Use this returned function inside a `map()` call to apply discounts to all products.
 */
 
+function applyDiscount (discountPercent) {
+  return function (product) {
+    const discountedPrice = product.price * (1 - discountPercent / 100);
+    return { ...product, discountedPrice: discountedPrice };
+  }
+}
+
+const productsArray2 = [
+  { name : "Laptop", price: 1000 },
+  { name : "Phone", price : 500 },
+  { name : "Tablet", price : 800 },
+];
+
+const tenPercentOff = applyDiscount (10);
+const discountedProducts = productsArray2.map(tenPercentOff);
+
+console.log(discountedProducts);
+
 
 /*
 🔹 Task 4: Calculate Total Inventory Value
@@ -81,6 +128,23 @@ Step-by-Step:
 2. Add only the prices of products where `inStock` is true.
 3. Store the total in a new variable.
 */
+
+const productNames = productsArray.reduce(product => product.name);
+console.log(productNames);
+// Output: ["Laptop", "Phone", "Tablet", "Monitor", "Keyboard" ]]
+
+const availableProducts = filterProducts (productsArray, isInStock);
+console.log(availableProducts);
+
+function calculateTotalInventoryValue(productsArray) {
+  return productsArray.reduce((total, product) => {
+    if (product.inStock) { 
+    return total + product.price;
+  } else {
+    return total;
+  }
+}, 0);
+}
 
 
 // ============================================
