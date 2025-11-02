@@ -129,22 +129,17 @@ Step-by-Step:
 3. Store the total in a new variable.
 */
 
-const productNames = productsArray.reduce(product => product.name);
-console.log(productNames);
-// Output: ["Laptop", "Phone", "Tablet", "Monitor", "Keyboard" ]]
-
-const availableProducts = filterProducts (productsArray, isInStock);
-console.log(availableProducts);
-
-function calculateTotalInventoryValue(productsArray) {
-  return productsArray.reduce((total, product) => {
-    if (product.inStock) { 
-    return total + product.price;
-  } else {
-    return total;
+function calculateTotalInventoryValue (productsArray) {
+  return productsArray.reduce ((total, products) => {
+    if (products.inStock) {
+      return total + products.price;
+    } else {
+      return total;
+    }
+  }, 0);   
   }
-}, 0);
-}
+
+  console.log("Total inventory value (in stock): ", calculateTotalInventoryValue)
 
 
 // ============================================
